@@ -1,0 +1,58 @@
+import random
+import string
+import os
+
+# Function to generate a random username
+def generate_username(length=8):
+    return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
+
+# Function to generate a random email address
+def generate_email(username):
+    return f"{username}@example.com"
+
+# Function to generate a random password
+def generate_password(length=12):
+    return ''.join(random.choices(string.ascii_letters + string.digits + string.punctuation, k=length))
+
+# Function to save generated accounts to a file and print them
+def save_accounts(accounts, filename="accounts.txt"):
+    # Define the custom path where the file will be saved
+    custom_path = r"C:\Users\Ryder-PC\source\repos\Discord Roblox Gen\Discord Roblox Gen"
+    
+    # Ensure that the directory exists
+    os.makedirs(custom_path, exist_ok=True)
+    
+    # Create the full path to the file
+    file_path = os.path.join(custom_path, filename)
+    
+    # Save to file and print to console
+    with open(file_path, 'a') as file:
+        for account in accounts:
+            file.write(f"Username: {account['username']}, Email: {account['email']}, Password: {account['password']}\n")
+            print(f"Generated account -> Username: {account['username']}, Email: {account['email']}, Password: {account['password']}")
+
+# Main function to generate accounts
+def generate_accounts():
+    # Ask user for number of accounts to generate
+    try:
+        num_accounts = int(input("How many accounts do you want to generate? (1-999999): "))
+        if num_accounts < 1 or num_accounts > 999999:
+            print("Please enter a number between 1 and 999999.")
+            return
+    except ValueError:
+        print("Invalid input! Please enter a valid number.")
+        return
+
+    # Ask user for how many accounts they want
+    accounts = []
+    for _ in range(num_accounts):
+        username = generate_username()
+        email = generate_email(username)
+        password = generate_password()
+        accounts.append({"username": username, "email": email, "password": password})
+
+    # Save the accounts to a file and print to the console
+    save_accounts(accounts)
+
+if __name__ == "__main__":
+    generate_accounts()
