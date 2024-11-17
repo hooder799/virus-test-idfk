@@ -1,58 +1,49 @@
 import random
 import string
-import os
 
-# Function to generate a random username
-def generate_username(length=8):
+# Function to generate random strings (username, password)
+def generate_random_string(length=8):
     return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
-# Function to generate a random email address
+# Function to generate an email address (username + example.com)
 def generate_email(username):
     return f"{username}@example.com"
 
-# Function to generate a random password
-def generate_password(length=12):
-    return ''.join(random.choices(string.ascii_letters + string.digits + string.punctuation, k=length))
+# Function to generate account data (username, email, password)
+def generate_account_data(website):
+    username = generate_random_string(random.randint(8, 12))
+    email = generate_email(username)
+    password = generate_random_string(random.randint(8, 16))
+    
+    return f"Website: {website.capitalize()} - Username: {username}, Email: {email}, Password: {password}"
 
-# Function to save generated accounts to a file and print them
-def save_accounts(accounts, filename="accounts.txt"):
-    # Define the custom path where the file will be saved
-    custom_path = r"C:\Users\Ryder-PC\source\repos\Discord Roblox Gen\Discord Roblox Gen"
-    
-    # Ensure that the directory exists
-    os.makedirs(custom_path, exist_ok=True)
-    
-    # Create the full path to the file
-    file_path = os.path.join(custom_path, filename)
-    
-    # Save to file and print to console
-    with open(file_path, 'a') as file:
+# Function to write accounts to a text file
+def write_to_file(accounts, filename="generated_accounts.txt"):
+    with open(filename, 'a') as file:
         for account in accounts:
-            file.write(f"Username: {account['username']}, Email: {account['email']}, Password: {account['password']}\n")
-            print(f"Generated account -> Username: {account['username']}, Email: {account['email']}, Password: {account['password']}")
+            file.write(account + "\n")
 
-# Main function to generate accounts
-def generate_accounts():
-    # Ask user for number of accounts to generate
-    try:
-        num_accounts = int(input("How many accounts do you want to generate? (1-999999): "))
-        if num_accounts < 1 or num_accounts > 999999:
-            print("Please enter a number between 1 and 999999.")
-            return
-    except ValueError:
-        print("Invalid input! Please enter a valid number.")
+# Main function to generate and display accounts
+def main():
+    website = input("Enter the website name (e.g., roblox, crunchyroll, disneyplus): ").strip().lower()
+    num_accounts = int(input("How many accounts would you like to generate (1-1000)? ").strip())
+
+    if num_accounts < 1 or num_accounts > 1000:
+        print("Please enter a valid number between 1 and 1000.")
         return
 
-    # Ask user for how many accounts they want
+    # Generate accounts
     accounts = []
     for _ in range(num_accounts):
-        username = generate_username()
-        email = generate_email(username)
-        password = generate_password()
-        accounts.append({"username": username, "email": email, "password": password})
+        account = generate_account_data(website)
+        accounts.append(account)
+        print(account)  # Display account in console
 
-    # Save the accounts to a file and print to the console
-    save_accounts(accounts)
+    # Write to file
+    write_to_file(accounts)
 
+    print(f"\n{num_accounts} accounts have been generated and saved to 'generated_accounts.txt'.")
+
+# Run the program
 if __name__ == "__main__":
-    generate_accounts()
+    main()
