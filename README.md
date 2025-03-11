@@ -1,8 +1,10 @@
 Copyright claim
 if you somehow copy this private project your gay 
 
-Disclamer
-this shit is for enternainment purposes and for testing not for destroying random ppls computers this shit will chrash you if you do this cry about it kid :) 
+(Disclamer!)
+
+this shit is for enternainment purposes and for testing not for destroying random ppls computers this shit will chrash you if you do this and run it cry about it kid 
+i cant fix it but you can go into the code and fix it also some of the viruses put it in startup so if you wawnt to fix it do it fast and as fast as yo ucan:) 
 
 steps:
 1 dowload
